@@ -8,9 +8,11 @@ set -e
 OUT_DIR=$(pwd)/out
 mkdir -p "$OUT_DIR"
 
+git clone -b google --single-branch https://github.com/GrowtopiaJaw/aarch64-linux-android-4.9.git aarch64-linux-android-4.9
+
 # Variáveis de compilação
+export CROSS_COMPILE=$(pwd)/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 export ARCH=arm64
-export CROSS_COMPILE=aarch64-linux-gnu-
 export KCFLAGS=-mno-android
 
 # Defconfig do dispositivo
@@ -18,14 +20,6 @@ DEFCONFIG=a20s_eur_open_defconfig
 
 echo "=== Configurando kernel ==="
 make -C $(pwd) O="$OUT_DIR" "$DEFCONFIG"
-
-# Desativa stack protector que dá erro
-scripts/config --disable CC_STACKPROTECTOR_STRONG
-scripts/config --disable CC_STACKPROTECTOR
-scripts/config --disable CC_STACKPROTECTOR_REGULAR
-
-# Atualiza o .config depois de mudar opções
-make -C $(pwd) O="$OUT_DIR" olddefconfig
 
 echo "=== Compilando kernel ==="
 make -C $(pwd) O="$OUT_DIR" -j$(nproc) \
