@@ -11,7 +11,8 @@ mkdir -p "$OUT_DIR"
 
 
 # Variáveis de compilação
-export CROSS_COMPILE=$(pwd)/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+export PATH="$(pwd)/aarch64-linux-android-4.9-toolchain/bin:$PATH"
+export CROSS_COMPILE=aarch64-linux-android-
 export ARCH=arm64
 export KCFLAGS=-mno-android
 
