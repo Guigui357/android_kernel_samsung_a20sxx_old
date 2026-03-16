@@ -8,7 +8,7 @@ set -e
 OUT_DIR=$(pwd)/out
 mkdir -p "$OUT_DIR"
 
-git clone -b google --single-branch https://github.com/GrowtopiaJaw/aarch64-linux-android-4.9.git aarch64-linux-android-4.9
+
 
 # Variáveis de compilação
 export CROSS_COMPILE=$(pwd)/aarch64-linux-android-4.9/bin/aarch64-linux-android-
